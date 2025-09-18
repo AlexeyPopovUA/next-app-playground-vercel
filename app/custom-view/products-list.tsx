@@ -1,27 +1,29 @@
-import { EnrichedProduct } from '#/app/custom-view/types';
-import { HeaderCell } from '#/app/custom-view/HeaderCell';
+import { useCallback, useContext } from 'react';
+import { HeaderCell } from '#/app/custom-view/header-cell';
+import { DataTableContext } from '#/app/custom-view/data-table-context';
 
-type Props = {
-  products: EnrichedProduct[];
-  onSortingToggle: ({ field }: { field: string }) => void;
-};
+export function ProductsList() {
+  const context = useContext(DataTableContext)
 
-export function ProductsList(props: Props) {
-  return props.products.length ? (
+  const onSortingToggle = useCallback(({field}: {field: string}) => {
+    context?.actions.setSortingField(field)
+  }, []);
+
+  return context?.state.products.length ? (
     <div className="product-list-container">
       <div className="grid grid-cols-2 p-2 hover:bg-gray-700">
         <HeaderCell
-          clickHandler={props.onSortingToggle}
+          clickHandler={onSortingToggle}
           text="Name"
           columnData={{ field: 'name' }}
         />
         <HeaderCell
-          clickHandler={props.onSortingToggle}
+          clickHandler={onSortingToggle}
           text="Category"
           columnData={{ field: 'categoryData.name' }}
         />
       </div>
-      {props.products.map((product) => (
+      {context.state.products.map((product) => (
         <div
           className="grid grid-cols-2 p-2 hover:bg-gray-700"
           key={product.id}

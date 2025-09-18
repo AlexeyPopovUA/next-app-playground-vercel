@@ -1,13 +1,12 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useContext, useState } from 'react';
+import { DataTableContext } from '#/app/custom-view/data-table-context';
 
-type Props = {
-  onChange: (value: string) => void
-}
+export function ProductsSearch() {
+  const context = useContext(DataTableContext);
 
-export function ProductsSearch(props: Props) {
   const handleInternalChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    props.onChange(e.target.value);
-  }, [props.onChange]);
+    context?.actions.setFilterValue(e.target.value)
+  }, []);
 
   return (
     <input name="search-field" className="text-black" onChange={handleInternalChange} />
