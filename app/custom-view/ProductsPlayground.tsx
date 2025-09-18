@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ProductsSearch } from '#/app/custom-view/products-search';
 import { ProductsList } from '#/app/custom-view/products-list';
 import { useProducts } from '#/app/custom-view/hooks';
@@ -14,11 +14,9 @@ export function ProductsPlayground() {
 
   const [products] = useProducts({filterValue: state.searchValue});
 
-  const handleChange = (value: string) => {
-    console.log('handleChange', value);
-
-    setState({ ...state, searchValue: value });
-  };
+  const handleChange = useCallback((value: string) => {
+    setState(prevState => ({ ...prevState, searchValue: value }));
+  }, []);
 
   return (
     <>
