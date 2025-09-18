@@ -173,6 +173,16 @@ const demos = [
           'Pass context between Client Components that cross Server/Client Component boundary',
       },
     ],
+  },{
+    name: 'Custom',
+    items: [
+      {
+        slug: 'custom-view',
+        name: 'Custom view',
+        description:
+          'Custom playground',
+      },
+    ],
   },
 ] as const satisfies DemoCategory[];
 
