@@ -1,17 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import { ProductsSearch } from '#/app/custom-view/products-search';
 import { ProductsList } from '#/app/custom-view/products-list';
-import { useEffect, useState } from 'react';
-import { data, Product } from '#/app/_internal/_data';
+import { useProducts } from '#/app/custom-view/hooks';
 
-type PlaygroundState = { searchValue: string; products: Product[] };
+type PlaygroundState = { searchValue: string; };
 
 export function ProductsPlayground() {
   const [state, setState] = useState<PlaygroundState>({
-    searchValue: '',
-    products: [],
+    searchValue: ''
   });
+
+  const [products] = useProducts({filterValue: state.searchValue});
 
   const handleChange = (value: string) => {
     console.log('handleChange', value);
@@ -19,16 +20,10 @@ export function ProductsPlayground() {
     setState({ ...state, searchValue: value });
   };
 
-  useEffect(() => {
-    const filteredProducts = data.products.filter(product => product.name.includes(state.searchValue));
-
-    setState({...state, products: filteredProducts});
-  }, [state.searchValue]);
-
   return (
     <>
       <ProductsSearch onChange={handleChange} />
-      <ProductsList products={state.products} />
+      <ProductsList products={products} />
     </>
   );
 }
