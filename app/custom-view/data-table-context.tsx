@@ -28,6 +28,7 @@ type ProductsState = {
 type DataTableContextState = {
   products: EnrichedProduct[];
   categories: Category[];
+  filterValue: string;
 };
 
 type DataTableContextActions = {
@@ -110,7 +111,7 @@ export function DataTableContextProvider({ children }: PropsWithChildren) {
   return (
     <DataTableContext.Provider
       value={{
-        state: { products: state.products, categories: state.categories },
+        state: { products: state.products, categories: state.categories, filterValue: state.filterValue },
         actions: { setFilterValue, setSortingOrder, setSortingField },
       }}
     >
