@@ -1,8 +1,12 @@
 'use cache';
 
-export default async function Page() {
+import { ProductsPlayground } from '#/app/custom-view/ProductsPlayground';
 
+export default async function Page() {
   return (
-    <div> Bla</div>
+    <>
+      <h2>Products</h2>
+      <ProductsPlayground />
+    </>
   );
 }

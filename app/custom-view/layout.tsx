@@ -22,7 +22,7 @@ export default async function Layout({
   return (
     <>
       <Boundary label="Demo" kind="solid" animateRerendering={false}>
-        <div> MDX source was here</div>
+        <h1>Products search and list</h1>
       </Boundary>
       <Boundary
         label="layout.tsx"
